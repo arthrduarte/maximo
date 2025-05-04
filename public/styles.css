@@ -1,0 +1,97 @@
+.form-control:focus {
+    border-color: #000000;
+    box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1);
+}
+
+.code-inputs {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+.code-input {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 600;
+    padding: 0.25rem;
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    font-weight: 500;
+    border-radius: 0.75rem;
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    background-color: #000000;
+    border-color: #000000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary:hover {
+    background-color: #333333;
+    border-color: #333333;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn-link {
+    color: #000000;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+}
+
+.btn-link:hover {
+    color: #333333;
+    text-decoration: underline;
+}
+
+.spinner-border {
+    margin-right: 0.5rem;
+    width: 1rem;
+    height: 1rem;
+}
+
+.text-muted a {
+    color: inherit;
+    text-decoration: underline;
+}
+
+.text-muted a:hover {
+    text-decoration: none;
+}
+
+.success-icon {
+    font-size: 3rem;
+    color: #000000;
+}
+
+.toastify {
+    border-radius: 0.75rem;
+    font-weight: 500;
+    padding: 0.75rem 1.25rem;
+}
+
+.form-label {
+    color: #000000;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+h1, h3 {
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: #000000;
+    margin-bottom: 0.5rem;
+}
+
+.code-inputs {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    margin: 1rem 0;
+}

@@ -1,0 +1,31 @@
+{
+  "include": ["server/**/*", "db/**/*", "scripts/scriptFunctions.ts"],
+  "exclude": ["node_modules", "build", "dist", "**/*.test.ts"],
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": ".",
+    "incremental": true,
+    "tsBuildInfoFile": "./node_modules/typescript/tsbuildinfo",
+    "module": "ESNext",
+    "strict": true,
+    "lib": ["esnext", "dom", "dom.iterable"],
+    "jsx": "preserve",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"],
+      "@db/*": ["./db/*"],
+      "@server/*": ["./server/*"]
+    },
+    "types": ["node"],
+    "noEmit": false,
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "target": "ESNext",
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true
+  }
+}

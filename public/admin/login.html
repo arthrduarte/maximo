@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Admin Login - Maximo</title>
+    <link id="favicon" rel="icon" type="image/png" href="/images/favicon/Maximo favicon dark.png">
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script>
+        // Function to set the favicon based on color scheme
+        function setFavicon() {
+            const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+            const favicon = document.getElementById('favicon');
+            
+            if (darkModeMediaQuery.matches) {
+                favicon.href = '/images/favicon/Maximo favicon white.png';
+            } else {
+                favicon.href = '/images/favicon/Maximo favicon dark.png';
+            }
+        }
+        
+        // Set favicon on page load
+        document.addEventListener('DOMContentLoaded', setFavicon);
+        
+        // Update favicon when color scheme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', setFavicon);
+    </script>
+</head>
+<body class="m-0 p-0 min-h-screen flex flex-col font-sans bg-gray-50">
+    <!-- Navigation -->
+    <nav class="relative z-20 w-full bg-white bg-opacity-90 shadow-sm">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-bold tracking-tight text-black">Maximo</h1>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Login Section -->
+    <div class="relative z-10 flex-grow flex items-center justify-center">
+        <div class="container mx-auto px-4 py-16">
+            <div class="max-w-md mx-auto">
+                <div class="bg-white bg-opacity-95 p-8 rounded-xl shadow-lg">
+                    <div class="text-center mb-8">
+                        <h2 class="text-3xl font-bold tracking-tight text-black">
+                            Admin Portal
+                        </h2>
+                        <p class="mt-2 text-gray-600">
+                            Please sign in to access the admin panel
+                        </p>
+                    </div>
+
+                    <form id="loginForm" class="space-y-6">
+                        <div>
+                            <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                            <input id="phone" 
+                                   name="phone" 
+                                   type="tel" 
+                                   required 
+                                   class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-black transition duration-200" 
+                                   placeholder="+1234567890">
+                        </div>
+
+                        <button type="submit" 
+                                class="cursor-pointer w-full py-3 px-4 text-lg font-medium rounded-xl bg-black text-white border border-black shadow-sm hover:bg-gray-800 hover:border-gray-800 active:transform active:translate-y-0.5 transition-all duration-200">
+                            Sign In
+                        </button>
+                    </form>
+
+                    <div id="otpForm" class="space-y-6 hidden">
+                        <div>
+                            <label for="otp" class="block text-sm font-medium text-gray-700 mb-1">Verification Code</label>
+                            <input id="otp" 
+                                   name="otp" 
+                                   type="text" 
+                                   required 
+                                   class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-black focus:border-black transition duration-200" 
+                                   placeholder="Enter verification code">
+                        </div>
+
+                        <button id="verifyOtp" 
+                                class="cursor-pointer w-full py-3 px-4 text-lg font-medium rounded-xl bg-black text-white border border-black shadow-sm hover:bg-gray-800 hover:border-gray-800 active:transform active:translate-y-0.5 transition-all duration-200">
+                            Verify Code
+                        </button>
+                    </div>
+
+                    <div id="error" class="mt-4 text-center text-sm text-red-600 hidden"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="relative z-20 w-full bg-white bg-opacity-90 border-t border-gray-200 py-4 text-sm text-gray-500">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center space-y-2 md:space-y-0">
+                <div>
+                    <span>&copy; 2025 Maximo. All rights reserved.</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="particles-js" class="fixed inset-0 z-0"></div>
+
+    <script type="module">
+        import { initParticlesBackground } from '/scripts/particles-background.js';
+        document.addEventListener('DOMContentLoaded', () => {
+            initParticlesBackground();
+        });
+    </script>
+
+    <script>
+        // Initialize Supabase client
+        const { createClient } = supabase;
+        const supabaseClient = createClient(
+            'https://maerosepjinqxgmrxbef.supabase.co',
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1hZXJvc2VwamlucXhnbXJ4YmVmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzgwMTMwMDQsImV4cCI6MjA1MzU4OTAwNH0.gu-nwU8rmvSAA3e07qlWn2rTnT3G-YA5Ytc4MrMXeas',
+            {
+                auth: {
+                    autoRefreshToken: true,
+                    persistSession: true
+                },
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            }
+        );
+
+        // Show error message
+        function showError(message) {
+            const errorDiv = document.getElementById('error');
+            errorDiv.textContent = message;
+            errorDiv.classList.remove('hidden');
+        }
+
+        // Hide error message
+        function hideError() {
+            const errorDiv = document.getElementById('error');
+            errorDiv.classList.add('hidden');
+        }
+
+        // Show OTP form
+        function showOtpForm() {
+            document.getElementById('loginForm').classList.add('hidden');
+            document.getElementById('otpForm').classList.remove('hidden');
+        }
+
+        // Handle login form submission
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            hideError();
+
+            const phone = document.getElementById('phone').value;
+            
+            try {
+                const { error } = await supabaseClient.auth.signInWithOtp({
+                    phone: phone
+                });
+
+                if (error) throw error;
+
+                showOtpForm();
+            } catch (error) {
+                showError(error.message);
+            }
+        });
+
+        // Handle OTP verification
+        document.getElementById('verifyOtp').addEventListener('click', async () => {
+            hideError();
+
+            const phone = document.getElementById('phone').value;
+            const otp = document.getElementById('otp').value;
+
+            try {
+                const { data: { session }, error } = await supabaseClient.auth.verifyOtp({
+                    phone: phone,
+                    token: otp,
+                    type: 'sms'
+                });
+
+                if (error) throw error;
+
+                // Check if user is admin
+                const { data: profile, error: profileError } = await supabaseClient
+                    .from('profiles')
+                    .select('*')
+                    .eq('user_id', session.user.id)
+                    .single();
+
+                if (profileError || !profile || profile.role !== 'admin') {
+                    throw new Error('Unauthorized: Admin access required');
+                }
+
+                // Redirect to users page
+                window.location.href = '/admin/users';
+            } catch (error) {
+                showError(error.message);
+                if (error.message.includes('Unauthorized')) {
+                    // Sign out if not admin
+                    await supabaseClient.auth.signOut();
+                }
+            }
+        });
+
+        // Check if already authenticated
+        window.addEventListener('load', async () => {
+            const { data: { session }, error } = await supabaseClient.auth.getSession();
+            
+            if (session) {
+                try {
+                    // Check if user is admin
+                    const { data: profile, error: profileError } = await supabaseClient
+                        .from('profiles')
+                        .select('*')
+                        .eq('user_id', session.user.id)
+                        .single();
+
+                    if (!profileError && profile && profile.role === 'admin') {
+                        // Redirect to users page if already authenticated as admin
+                        window.location.href = '/admin/users';
+                    } else {
+                        // Sign out if not admin
+                        await supabaseClient.auth.signOut();
+                    }
+                } catch (error) {
+                    console.error('Error checking admin status:', error);
+                }
+            }
+        });
+    </script>
+</body>
+</html> 

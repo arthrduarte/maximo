@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Maximo - Your AI Executive Coach</title>
+    <link id="favicon" rel="icon" type="image/png" href="/images/favicon/Maximo favicon dark.png">
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script type="module" src="/scripts/script.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script>
+      window.SUPABASE_URL = 'https://maerosepjinqxgmrxbef.supabase.co';
+      window.SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1hZXJvc2VwamlucXhnbXJ4YmVmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzgwMTMwMDQsImV4cCI6MjA1MzU4OTAwNH0.gu-nwU8rmvSAA3e07qlWn2rTnT3G-YA5Ytc4MrMXeas';
+      
+      // Function to set the favicon based on color scheme
+      function setFavicon() {
+        const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        const favicon = document.getElementById('favicon');
+        
+        if (darkModeMediaQuery.matches) {
+          favicon.href = '/images/favicon/Maximo favicon white.png';
+        } else {
+          favicon.href = '/images/favicon/Maximo favicon dark.png';
+        }
+      }
+      
+      // Set favicon on page load
+      document.addEventListener('DOMContentLoaded', setFavicon);
+      
+      // Update favicon when color scheme changes
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', setFavicon);
+    </script>
+  </head>
+  <body class="m-0 p-0 min-h-screen flex items-center justify-center font-sans bg-gray-50">
+    <div class="relative z-20 p-4 sm:p-6">
+      <div class="w-full max-w-[420px] min-h-[320px] mx-auto p-4 sm:p-8 bg-white rounded-lg shadow-md transition-all duration-300 hover:shadow-lg">
+        <!-- Phone Number Form -->
+        <form id="phoneForm" class="form-container h-full flex flex-col justify-between space-y-6">
+          <div class="space-y-4">
+            <div class="text-center">
+              <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-black mb-1">Maximo</h2>
+              <small class="text-sm sm:text-md text-gray-500">Your AI Executive Coach</small>
+            </div>
+            <div class="flex flex-col sm:flex-row sm:gap-4">
+              <div class="mb-4 sm:mb-0 w-full">
+                <input type="text" 
+                       class="w-full px-3 py-3 sm:py-2 text-base border border-gray-300 rounded-lg focus:border-black focus:ring-4 focus:ring-black focus:ring-opacity-10" 
+                       id="first_name" 
+                       placeholder="First Name" 
+                       required>
+              </div>
+              <div class="w-full">
+                <input type="text" 
+                       class="w-full px-3 py-3 sm:py-2 text-base border border-gray-300 rounded-lg focus:border-black focus:ring-4 focus:ring-black focus:ring-opacity-10" 
+                       id="last_name" 
+                       placeholder="Last Name" 
+                       required>
+              </div>
+            </div>
+            <div>
+              <input type="email" 
+                     class="w-full px-3 py-3 sm:py-2 text-base border border-gray-300 rounded-lg focus:border-black focus:ring-4 focus:ring-black focus:ring-opacity-10" 
+                     id="email" 
+                     placeholder="Email Address" 
+                     required>
+            </div>
+            <div class="relative">
+              <div class="flex">
+                <select id="countryCode" 
+                        class="w-24 sm:w-28 px-2 py-3 sm:py-2 text-base border border-gray-300 rounded-l-lg focus:border-black focus:ring-4 focus:ring-black focus:ring-opacity-10 bg-white appearance-none cursor-pointer">
+                  <!-- US and Canada first -->
+                  <option value="+1" data-country="US" selected>🇺🇸 +1</option>
+                  <option value="+1" data-country="CA">🇨🇦 +1</option>
+                  
+                  <!-- Rest of countries in alphabetical order -->
+                  <option value="+971" data-country="AE">🇦🇪 +971</option>
+                  <option value="+93" data-country="AF">🇦🇫 +93</option>
+                  <option value="+355" data-country="AL">🇦🇱 +355</option>
+                  <option value="+374" data-country="AM">🇦🇲 +374</option>
+                  <option value="+54" data-country="AR">🇦🇷 +54</option>
+                  <option value="+43" data-country="AT">🇦🇹 +43</option>
+                  <option value="+61" data-country="AU">🇦🇺 +61</option>
+                  <option value="+994" data-country="AZ">🇦🇿 +994</option>
+                  <option value="+32" data-country="BE">🇧🇪 +32</option>
+                  <option value="+359" data-country="BG">🇧🇬 +359</option>
+                  <option value="+973" data-country="BH">🇧🇭 +973</option>
+                  <option value="+880" data-country="BD">🇧🇩 +880</option>
+                  <option value="+55" data-country="BR">🇧🇷 +55</option>
+                  <option value="+375" data-country="BY">🇧🇾 +375</option>
+                  <option value="+41" data-country="CH">🇨🇭 +41</option>
+                  <option value="+56" data-country="CL">🇨🇱 +56</option>
+                  <option value="+86" data-country="CN">🇨🇳 +86</option>
+                  <option value="+57" data-country="CO">🇨🇴 +57</option>
+                  <option value="+506" data-country="CR">🇨🇷 +506</option>
+                  <option value="+357" data-country="CY">🇨🇾 +357</option>
+                  <option value="+420" data-country="CZ">🇨🇿 +420</option>
+                  <option value="+49" data-country="DE">🇩🇪 +49</option>
+                  <option value="+45" data-country="DK">🇩🇰 +45</option>
+                  <option value="+1" data-country="DO">🇩🇴 +1</option>
+                  <option value="+213" data-country="DZ">🇩🇿 +213</option>
+                  <option value="+593" data-country="EC">🇪🇨 +593</option>
+                  <option value="+372" data-country="EE">🇪🇪 +372</option>
+                  <option value="+20" data-country="EG">🇪🇬 +20</option>
+                  <option value="+34" data-country="ES">🇪🇸 +34</option>
+                  <option value="+358" data-country="FI">🇫🇮 +358</option>
+                  <option value="+33" data-country="FR">🇫🇷 +33</option>
+                  <option value="+44" data-country="GB">🇬🇧 +44</option>
+                  <option value="+995" data-country="GE">🇬🇪 +995</option>
+                  <option value="+30" data-country="GR">🇬🇷 +30</option>
+                  <option value="+502" data-country="GT">🇬🇹 +502</option>
+                  <option value="+852" data-country="HK">🇭🇰 +852</option>
+                  <option value="+504" data-country="HN">🇭🇳 +504</option>
+                  <option value="+385" data-country="HR">🇭🇷 +385</option>
+                  <option value="+36" data-country="HU">🇭🇺 +36</option>
+                  <option value="+62" data-country="ID">🇮🇩 +62</option>
+                  <option value="+353" data-country="IE">🇮🇪 +353</option>
+                  <option value="+972" data-country="IL">🇮🇱 +972</option>
+                  <option value="+91" data-country="IN">🇮🇳 +91</option>
+                  <option value="+964" data-country="IQ">🇮🇶 +964</option>
+                  <option value="+98" data-country="IR">🇮🇷 +98</option>
+                  <option value="+354" data-country="IS">🇮🇸 +354</option>
+                  <option value="+39" data-country="IT">🇮🇹 +39</option>
+                  <option value="+962" data-country="JO">🇯🇴 +962</option>
+                  <option value="+81" data-country="JP">🇯🇵 +81</option>
+                  <option value="+254" data-country="KE">🇰🇪 +254</option>
+                  <option value="+996" data-country="KG">🇰🇬 +996</option>
+                  <option value="+855" data-country="KH">🇰🇭 +855</option>
+                  <option value="+82" data-country="KR">🇰🇷 +82</option>
+                  <option value="+965" data-country="KW">🇰🇼 +965</option>
+                  <option value="+7" data-country="KZ">🇰🇿 +7</option>
+                  <option value="+961" data-country="LB">🇱🇧 +961</option>
+                  <option value="+94" data-country="LK">🇱🇰 +94</option>
+                  <option value="+370" data-country="LT">🇱🇹 +370</option>
+                  <option value="+352" data-country="LU">🇱🇺 +352</option>
+                  <option value="+371" data-country="LV">🇱🇻 +371</option>
+                  <option value="+212" data-country="MA">🇲🇦 +212</option>
+                  <option value="+373" data-country="MD">🇲🇩 +373</option>
+                  <option value="+52" data-country="MX">🇲🇽 +52</option>
+                  <option value="+60" data-country="MY">🇲🇾 +60</option>
+                  <option value="+356" data-country="MT">🇲🇹 +356</option>
+                  <option value="+31" data-country="NL">🇳🇱 +31</option>
+                  <option value="+47" data-country="NO">🇳🇴 +47</option>
+                  <option value="+977" data-country="NP">🇳🇵 +977</option>
+                  <option value="+64" data-country="NZ">🇳🇿 +64</option>
+                  <option value="+968" data-country="OM">🇴🇲 +968</option>
+                  <option value="+507" data-country="PA">🇵🇦 +507</option>
+                  <option value="+595" data-country="PY">🇵🇾 +595</option>
+                  <option value="+51" data-country="PE">🇵🇪 +51</option>
+                  <option value="+63" data-country="PH">🇵🇭 +63</option>
+                  <option value="+92" data-country="PK">🇵🇰 +92</option>
+                  <option value="+48" data-country="PL">🇵🇱 +48</option>
+                  <option value="+351" data-country="PT">🇵🇹 +351</option>
+                  <option value="+974" data-country="QA">🇶🇦 +974</option>
+                  <option value="+40" data-country="RO">🇷🇴 +40</option>
+                  <option value="+381" data-country="RS">🇷🇸 +381</option>
+                  <option value="+7" data-country="RU">🇷🇺 +7</option>
+                  <option value="+966" data-country="SA">🇸🇦 +966</option>
+                  <option value="+46" data-country="SE">🇸🇪 +46</option>
+                  <option value="+65" data-country="SG">🇸🇬 +65</option>
+                  <option value="+386" data-country="SI">🇸🇮 +386</option>
+                  <option value="+421" data-country="SK">🇸🇰 +421</option>
+                  <option value="+503" data-country="SV">🇸🇻 +503</option>
+                  <option value="+66" data-country="TH">🇹🇭 +66</option>
+                  <option value="+216" data-country="TN">🇹🇳 +216</option>
+                  <option value="+90" data-country="TR">🇹🇷 +90</option>
+                  <option value="+886" data-country="TW">🇹🇼 +886</option>
+                  <option value="+380" data-country="UA">🇺🇦 +380</option>
+                  <option value="+598" data-country="UY">🇺🇾 +598</option>
+                  <option value="+998" data-country="UZ">🇺🇿 +998</option>
+                  <option value="+84" data-country="VN">🇻🇳 +84</option>
+                  <option value="+27" data-country="ZA">🇿🇦 +27</option>
+                </select>
+                <input type="tel" 
+                       class="w-full px-3 py-3 sm:py-2 text-base border border-gray-300 rounded-r-lg border-l-0 focus:border-black focus:ring-4 focus:ring-black focus:ring-opacity-10" 
+                       id="phone" 
+                       placeholder="Phone number" 
+                       required>
+              </div>
+            </div>
+          </div>
+          <div class="space-y-4">
+            <button type="button" 
+                    id="sendCode" 
+                    class="w-full py-3.5 sm:py-3 px-6 text-base font-medium rounded-xl bg-black text-white border border-black shadow-sm hover:bg-gray-800 hover:border-gray-800 active:transform active:translate-y-0.5 transition-all duration-200">
+              <span class="hidden w-4 h-4 mr-2 spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+              Continue
+            </button>
+            <div class="text-center">
+              <small class="text-xs sm:text-sm text-gray-500">By clicking continue you agree to our <a href="/terms" class="text-black hover:underline">Terms of Use</a> and <a href="/privacy" class="text-black hover:underline">Privacy Policy</a></small>
+            </div>
+            <div class="text-center">
+              <small class="text-xs sm:text-sm text-gray-500">By providing your phone number you agree to receive text messages and phone calls from Maximo. Consent is not a condition of purchase. Messages frequency will vary. Msg & data rates may apply. Reply HELP for help or STOP to cancel.</small>
+           </div>
+          </div>
+        </form>
+
+        <!-- Verification Code Form -->
+        <form id="verificationForm" class="hidden h-full flex flex-col justify-between space-y-6">
+          <div class="space-y-6">
+            <div class="text-center mb-8">
+              <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-black mb-1">Maximo</h2>
+              <small class="text-sm sm:text-md text-gray-500">Your AI Executive Coach</small>
+            </div>
+            <div class="space-y-6">
+              <h3 class="text-center text-base sm:text-lg font-medium text-gray-700">Enter 6 Digit Code</h3>
+              <div class="flex justify-center w-full">
+                <input type="text" 
+                       id="verificationInput"
+                       maxlength="6" 
+                       class="w-full h-14 text-center text-2xl tracking-[0.5em] font-semibold px-4 py-3 border border-gray-300 rounded-xl focus:border-black focus:ring-4 focus:ring-black focus:ring-opacity-10" 
+                       placeholder="000000">
+              </div>
+            </div>
+          </div>
+          <div class="space-y-4 w-full">
+            <button type="button" 
+                    id="verifyCode" 
+                    class="w-full py-3.5 sm:py-3 px-6 text-base font-medium rounded-xl bg-black text-white border border-black shadow-sm hover:bg-gray-800 hover:border-gray-800 active:transform active:translate-y-0.5 transition-all duration-200">
+              <span class="hidden w-4 h-4 mr-2 spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+              Verify Code
+            </button>
+            <div class="text-center">
+              <button type="button" 
+                      id="resendCode" 
+                      class="text-sm text-gray-500 hover:text-gray-700 hover:underline cursor-pointer">
+                Resend Code
+              </button>
+            </div>
+          </div>
+        </form>
+        
+        <!-- Success Message -->
+        <div id="successMessage" class="form-container hidden h-full flex flex-col justify-between space-y-4">
+          <div class="flex flex-col items-center justify-center p-8 space-y-6">
+            <div class="text-4xl sm:text-5xl text-black">
+              <i class="fas fa-check-circle"></i>
+            </div>
+            <h3 class="text-xl sm:text-2xl font-bold text-black text-center">Verification Successful</h3>
+            <p class="text-sm sm:text-md text-gray-600 text-center">Maximo will text you shortly</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="root"></div>
+    <script src="https://cdn.jsdelivr.net/npm/imask"></script>
+    
+    <footer class="fixed z-20 bottom-0 w-full bg-white bg-opacity-90 border-t border-gray-200 py-2 sm:py-3 text-xs sm:text-sm text-gray-500">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-col sm:flex-row justify-between items-center space-y-2 sm:space-y-0">
+          <div>
+            <span>&copy; 2025 Maximo. All rights reserved.</span>
+          </div>
+          <div class="flex space-x-4 sm:space-x-6">
+            <a href="/terms" class="hover:text-gray-900">Terms of Use</a>
+            <a href="/privacy" class="hover:text-gray-900">Privacy Policy</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </body>
+</html>

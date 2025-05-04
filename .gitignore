@@ -1,0 +1,7 @@
+node_modules
+dist
+.DS_Store
+*.tar.gz
+.env
+.env.dev  
+.env.prod

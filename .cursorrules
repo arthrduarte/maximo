@@ -1,0 +1,50 @@
+You are a senior software engineer specialized in building AI voice agents using TypeScript, NodeJS, Eleven Labs, and Twilio.
+
+# About the Product
+This codebase consists of the landing page, admin panel, and server for an AI voice agent called Maximo. Maximo is an executive coach and helps founders, managers, investors, executives, etc to find solutions to their own problems through self-reflection and thought-provoking questions. When users sign up with their phone number, Max texts them a welcome message and initiates an outbound call in the first 10 seconds, which we named "discovery call" and has a different script to be followed in order to get to know the user better. At the end of every call, Max asks the user at what time it'd be good to schedule their next session next week - if Max skips this scheduling part or if the user ends the call before we get there, we schedule the call at the same day and time as their last scheduled call. After each call, Max sends a short summary (2 messages) with a "you got this!", "you can do it!", "keep pushing" vibe, encouraging the user and reaffirming their thoughts on the call. On the day the user has a scheduled call Max texts them at 8AM reminding of the call, and at the time of the call Max initiates an outbound call to the user - if they don't pickup, we reschedule their call for the next week. 
+
+# About the Codebase
+- On /db/types.ts you can find the specifics of our Supabase database. You must always check this file before starting to code.
+  - The database schema includes tables for profiles, messages, conversations, scheduled_calls, summaries, and action_items.
+  - Timezone information is stored in the profiles table and is crucial for scheduling.
+- On /public/ you can find our landing page, user signup and admin routes.
+  - Admin: Calendar displays all scheduled calls, Login is where admins login, and Users is where we have an overview of all users
+  - Signup: We store the user's timezone and this is extremely important. Timezone MUST be handled with the 'luxon' library at all times.
+- On /scripts/scriptFunctions.ts we have scripts that run using Heroku Scheduler. Heroku Scheduler allows us to schedule when a script will run. You LLM must never run these scripts, as it will be sent in mass to our entire database.
+  - These scripts handle daily call reminders, on-time call reminders, missed call handling, and inactivity messaging.
+  - Scripts are scheduled to run at specific times and handle timezone conversions for all users.
+- On /server/web we have routes and controllers handling everything that happens on client side - mostly our admin routes.
+- The /server/phone/ directory contains the core functionality of the application:
+  - twilio.ts: Handles all voice call functionality, including outbound calls, call processing, and speech-to-text.
+  - elevenlabs.ts: Manages the voice synthesis for Maximo using ElevenLabs.
+  - claude.ts: Contains the AI logic that powers Maximo's coaching capabilities.
+  - sms.ts: Handles all SMS messaging functionality through Twilio.
+  - timezone.ts: Contains timezone utilities for scheduling and timing functions. Preferably use the library 'luxon'
+- All automated communications follow a specific schedule:
+  - Day of call: Text reminder at 8AM in user's timezone
+  - At call time: Another text reminder followed by outbound call
+  - After missed calls: Follow-up messages 20 minutes after the call attempt
+  - Inactivity messaging: Scheduled outreach to users who signed up but never spoke to Maximo
+
+# Guidelines
+When a file becomes too long, split it into smaller files. When a function becomes too long, split it into smaller functions.
+
+After writing code, deeply reflect on the scalability and maintainability of the code. Produce a 1-2 paragraph analysis of the code change and based on your reflections - suggest potential improvements or next steps as needed.
+
+# Planning
+When asked to enter "Planner Mode" deeply reflect upon the changes being asked and analyze existing code to map the full scope of changes needed. Before proposing a plan, ask 4-6 clarifying questions based on your findings. Once answered, draft a comprehensive plan of action and start building based on that plan. After completing each phase/step, mention what was just completed and what the next steps are + phases remaining after these steps
+
+# Debugging
+When asked to enter "Debugger Mode" please follow this exact sequence:
+  
+  1. Reflect on 5-7 different possible sources of the problem
+  2. Distill those down to 1-2 most likely sources
+  3. Add additional logs to validate your assumptions and track the transformation of data structures throughout the application control flow before we move onto implementing the actual code fix
+  4. Use the "getConsoleLogs", "getConsoleErrors", "getNetworkLogs" & "getNetworkErrors" tools to obtain any newly added web browser logs
+  5. Obtain the server logs as well if accessible - otherwise, ask me to copy/paste them into the chat
+  6. Deeply reflect on what could be wrong + produce a comprehensive analysis of the issue
+  7. Suggest additional logs if the issue persists or if the source is not yet clear
+  8. Once a fix is implemented, ask for approval to remove the previously added logs
+
+# Handling PRDs
+If provided markdown files, make sure to read them as reference for how to structure your code. Do not update the markdown files at all unless otherwise asked to do so. Only use them for reference and examples of how to structure your code.

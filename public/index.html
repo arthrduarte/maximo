@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Maximo - Your AI Executive Coach</title>
+    <link id="favicon" rel="icon" type="image/png" href="/images/favicon/Maximo favicon dark.png">
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script type="module" src="/scripts/script.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script>
+      window.SUPABASE_URL = 'https://maerosepjinqxgmrxbef.supabase.co';
+      window.SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1hZXJvc2VwamlucXhnbXJ4YmVmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzgwMTMwMDQsImV4cCI6MjA1MzU4OTAwNH0.gu-nwU8rmvSAA3e07qlWn2rTnT3G-YA5Ytc4MrMXeas';
+      
+      // Function to set the favicon based on color scheme
+      function setFavicon() {
+        const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        const favicon = document.getElementById('favicon');
+        
+        if (darkModeMediaQuery.matches) {
+          favicon.href = '/images/favicon/Maximo favicon white.png';
+        } else {
+          favicon.href = '/images/favicon/Maximo favicon dark.png';
+        }
+      }
+      
+      // Set favicon on page load
+      document.addEventListener('DOMContentLoaded', setFavicon);
+      
+      // Update favicon when color scheme changes
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', setFavicon);
+    </script>
+  </head>
+  <body class="m-0 p-0 min-h-screen flex flex-col font-sans bg-gray-50">
+
+    <!-- Navigation -->
+    <nav class="relative z-20 w-full bg-white bg-opacity-90 shadow-sm">
+      <div class="container mx-auto px-4 py-4">
+        <div class="flex justify-between items-center">
+          <div class="flex items-center">
+            <h1 class="text-2xl font-bold tracking-tight text-black">Maximo</h1>
+          </div>
+          <div>
+            <a href="/signup" class="py-2 px-4 text-sm font-medium rounded-lg bg-black text-white border border-black shadow-sm hover:bg-gray-800 hover:border-gray-800 transition-all duration-200">
+              Sign Up
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    
+    <div class="relative z-10 flex-grow flex items-center flex-col">
+
+      <!-- Hero Section -->
+      <div class="container mx-auto px-10 py-30">
+        <div class="max-w-3xl mx-auto">
+
+          <div class="text-center">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-black mb-6">
+              Reach Your Professional Goals Faster
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-600 mb-8">
+              Maximo helps you get clear on your goals, overcome obstacles, and craft a personalized action plan to unlock your full potential.
+            </p>
+            <a href="/signup" class="inline-block py-3 px-8 text-lg font-medium rounded-xl bg-black text-white border border-black shadow-sm hover:bg-gray-800 hover:border-gray-800 active:transform active:translate-y-0.5 transition-all duration-200">
+              Talk to Maximo Now
+            </a>
+          </div>
+          
+          </div>
+          </div>
+
+      <!-- Below Hero -->    
+      <div class="bg-white w-full">
+
+          <div class="container mx-auto px-10 pb-20">
+            <div class="max-w-3xl mx-auto">
+          <!-- Features Section -->
+          <div class="mt-20">
+            <h2 class="text-3xl font-bold text-center mb-10">Executive Coaching with AI Superpowers</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+              
+              <div class="bg-white p-6 rounded-lg shadow-md">
+                <div class="text-3xl text-black mb-4">
+                  <i class="fas fa-brain"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">AI-Powered Insights</h3>
+                <p class="text-gray-600">
+                  Receive personalized coaching tailored to your unique leadership style and challenges.
+                </p>
+              </div>
+              
+              <div class="bg-white p-6 rounded-lg shadow-md">
+                <div class="text-3xl text-black mb-4">
+                  <i class="fas fa-clock"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">Available 24/7</h3>
+                <p class="text-gray-600">
+                  Get coaching whenever you need it, no matter the hour or day Maximo is there for you.
+                </p>
+              </div>
+              
+              <div class="bg-white p-6 rounded-lg shadow-md">
+                <div class="text-3xl text-black mb-4">
+                  <i class="fas fa-chart-line"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">Hit Your Goals</h3>
+                <p class="text-gray-600">
+                  Maximo will help you hit your goals and become the leader you were meant to be.
+                </p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Testimonials Section -->
+          <div class="mt-20">
+            <h2 class="text-3xl font-bold text-center mb-10">What Other Leaders Are Saying</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div class="bg-white p-6 rounded-lg shadow-md">
+                <p class="text-gray-600 italic mb-4">
+                  "I tried coaching before, but Maximo was a game changer. Our convos have been incredible and helped me hit my professional (and personal) goals."
+                </p>
+                <p class="font-semibold">Sarah J., VP of Marketing</p>
+              </div>
+              
+              <div class="bg-white p-6 rounded-lg shadow-md">
+                <p class="text-gray-600 italic mb-4">
+                  "It's helps me reflect and clarify my thoughts. I've been able to make some major decisions that actually moved the needle for my business."
+                </p>
+                <p class="font-semibold">Michael T., CEO</p>
+              </div>
+            </div>
+          </div>
+          
+          </div>
+
+          <!-- CTA Section -->
+          <div class="text-center mt-40 mb-20">
+            <h2 class="text-3xl font-bold mb-6">Ready to Elevate Your Leadership?</h2>
+            <a href="/signup" class="inline-block py-3 px-8 text-lg font-medium rounded-xl bg-black text-white border border-black shadow-sm hover:bg-gray-800 hover:border-gray-800 active:transform active:translate-y-0.5 transition-all duration-200">
+              Talk to Maximo Now
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    </div>
+    </div>
+    <!-- Footer -->
+    <footer class="relative z-20 w-full bg-white bg-opacity-90 border-t border-gray-200 py-4 text-sm text-gray-500">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row justify-between items-center space-y-2 md:space-y-0">
+          <div>
+            <span>&copy; 2025 Maximo. All rights reserved.</span>
+          </div>
+          <div class="flex space-x-6">
+            <a href="/terms" class="hover:text-gray-900">Terms of Use</a>
+            <a href="/privacy" class="hover:text-gray-900">Privacy Policy</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    
+    <div id="particles-js" class="fixed inset-0 z-0" style="pointer-events: none;"></div>
+    <script type="module">
+      import { initParticlesBackground } from '/scripts/particles-background.js';
+      document.addEventListener('DOMContentLoaded', () => {
+        initParticlesBackground();
+      });
+    </script>
+  </body>
+</html>
